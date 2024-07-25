@@ -12,5 +12,7 @@ namespace DoAnNosql.Models
         public string hoTen { get; set; }
         public int tuoi { set; get; }
         public string cccd { set; get; } = string.Empty;
+
+        
     }
 }
