@@ -261,7 +261,7 @@ namespace DoAnNosql
         }
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex > 0)
             {
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
 
@@ -283,6 +283,13 @@ namespace DoAnNosql
         private void btnSaveUpdate_Click(object sender, EventArgs e)
         {
             _ = UpdateNode();
+        }
+
+        private void Strip_TTBaoHiem_Click(object sender, EventArgs e)
+        {
+            InsuranceForm ins = new InsuranceForm(); 
+            ins.ShowDialog();
+
         }
     }
 }
