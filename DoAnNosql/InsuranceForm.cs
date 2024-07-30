@@ -12,6 +12,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Aspose.Words;
+using Aspose.Words.Tables;
+using ThuVienWinform.Report.AsposeWordExtension;
+using System.Diagnostics;
+
+//using ThuVienWinform.Report.AsposeWordExtension;
+
 namespace DoAnNosql
 {
     public partial class InsuranceForm : Form
@@ -27,6 +34,7 @@ namespace DoAnNosql
             dataTable = new DataTable();
             _ = ReFreshDataGrid();
             LoadDataIntoComboBoxAsync();
+            btn_XuatFile.Enabled = false;
         }
         private bool CheckValid()
         {
@@ -346,7 +354,7 @@ namespace DoAnNosql
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("exception dòng 253 Error: " + ex.Message);
+                    MessageBox.Show("exception dòng 354 Error: " + ex.Message);
                 }
             }
         }
@@ -571,7 +579,7 @@ namespace DoAnNosql
                     };
                     await session.RunAsync(updateQuery, parameters);
                     MessageBox.Show("Node updated successfully.");
-                    
+
                 }
             }
             catch (Exception ex)
@@ -633,6 +641,7 @@ namespace DoAnNosql
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            btn_XuatFile.Enabled = true;
             btn_Sua.Enabled = true;
             btn_Xoa.Enabled = true;
             btn_Luu.Enabled = false;
@@ -697,7 +706,7 @@ namespace DoAnNosql
 
         private void btn_Sua_Click(object sender, EventArgs e)
         {
-            
+
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 EnableField();
@@ -722,7 +731,85 @@ namespace DoAnNosql
             dataGridView1.Enabled = true;
             DisableField();
             btn_themmoi.Enabled = true;
+
+        }
+
+        private void btn_XuatFile_Click(object sender, EventArgs e)
+        {
+
+
+
+            var homNay = DateTime.Now;
+            // Bước 1: Nạp file mẫu
+            Document baoCao = new Document("Template\\Mau_Bao_Cao.doc");
+
+            // Bước 2: Điền các thông tin cố định
+            baoCao.MailMerge.Execute(new[] { "TINH" }, new[] { "ĐOM ĐÓM" });
+            baoCao.MailMerge.Execute(new[] { "Ngay_Thang_Nam_BC" }, new[] { string.Format("JACK 97, ngày {0} tháng {1} năm {2}", homNay.Day, homNay.Month, homNay.Year) });
+            baoCao.MailMerge.Execute(new[] { "HO_TEN" }, new[] { lb_idcd.Text });
+            baoCao.MailMerge.Execute(new[] { "Tuoi" }, new[] { lb_tuoi.Text });
+            baoCao.MailMerge.Execute(new[] { "CCCD" }, new[] { comboBox1.Text });
+            // baoCao.MailMerge.Execute(new[] { "Ngay_Sinh" }, new[] { dateNgaySinh.Value.ToString("dd/MM/yyyy") });
+            baoCao.MailMerge.Execute(new[] { "Start" }, new[] { FormatDate(tb_start_date.Text) });
+            baoCao.MailMerge.Execute(new[] { "End" }, new[] { FormatDate(tb_end_date.Text) });
+            baoCao.MailMerge.Execute(new[] { "So_HD" }, new[] { tb_policy_id.Text });
+            baoCao.MailMerge.Execute(new[] { "SDT" }, new[] { "JACK 97 123123" });
+            baoCao.MailMerge.Execute(new[] { "Que_Quan" }, new[] { "Bến Tre" });
+
+            baoCao.MailMerge.Execute(new[] { "Loai_Bao_Hiem" }, new[] { comboBox2.Text });
+            baoCao.MailMerge.Execute(new[] { "NCC" }, new[] { tb_tennhacungcap.Text });
+            baoCao.MailMerge.Execute(new[] { "GiaHan" }, new[] { tb_start_date.Text });
+            baoCao.MailMerge.Execute(new[] { "TanSuat" }, new[] { cb_donvi.Text });
+            baoCao.MailMerge.Execute(new[] { "TienYeuCau" }, new[] { tb_co_payment_amount.Text });
+            baoCao.MailMerge.Execute(new[] { "TienTDK" }, new[] { tb_premium_amount.Text });
+
+            string startDateFormatted = FormatDate(tb_start_date.Text);
+            string endDateFormatted = FormatDate(tb_end_date.Text);
+
+            Table bangThongTinCongdan = baoCao.GetChild(NodeType.Table, 1, true) as Table; // Lấy bảng thứ 2 trong file mẫu
+            if (bangThongTinCongdan != null)
+            {
+                int hangHienTai = 1;
+                // Chèn thêm một dòng mới với 5 cột
+                Row newRow = new Row(baoCao);
+                for (int i = 0; i < 4; i++)
+                {
+                    newRow.Cells.Add(new Cell(baoCao));
+                    newRow.Cells[i].AppendChild(new Paragraph(baoCao));
+                }
+                bangThongTinCongdan.Rows.Add(newRow);
+
+                // Điền dữ liệu vào các ô của dòng mới
+                bangThongTinCongdan.Rows[hangHienTai].Cells[0].FirstParagraph.AppendChild(new Run(baoCao, tb_policy_id.Text));
+                bangThongTinCongdan.Rows[hangHienTai].Cells[1].FirstParagraph.AppendChild(new Run(baoCao, comboBox2.Text));
+                bangThongTinCongdan.Rows[hangHienTai].Cells[2].FirstParagraph.AppendChild(new Run(baoCao, tb_tennhacungcap.Text));
+                bangThongTinCongdan.Rows[hangHienTai].Cells[3].FirstParagraph.AppendChild(new Run(baoCao, FormatDate(tb_ngaygiahan.Text)));
+            }
+            dataGridView1.Enabled = true;
             
+            // Bước 4: Lưu và mở file
+            string filePath = "D:\\HK7\\MongoDB\\DoAn\\DoAnNosql\\bin\\Debug\\net7.0-windows\\Template\\Mau_Bao_Cao.doc";
+            baoCao.Save(filePath);
+
+            // Mở tệp tài liệu bằng ứng dụng mặc định
+            ProcessStartInfo startInfo = new ProcessStartInfo(filePath)
+            {
+                UseShellExecute = true
+            };
+            Process.Start(startInfo);
+        }
+
+        private string FormatDate(string dateText)
+        {
+            if (DateTime.TryParse(dateText, out DateTime dateValue))
+            {
+                return dateValue.ToString("dd/MM/yyyy");
+            }
+            else
+            {
+                // Nếu chuỗi không hợp lệ, trả về giá trị mặc định hoặc thông báo lỗi
+                return "Ngày không hợp lệ";
+            }
         }
 
         //private void button1_Click(object sender, EventArgs e)
