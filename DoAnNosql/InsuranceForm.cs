@@ -27,6 +27,7 @@ namespace DoAnNosql
         DataTable dataTable;
         DataTable dataTable_Full;
         DataTable dataTable_Merge;
+        
         public InsuranceForm()
         {
             InitializeComponent();
@@ -268,6 +269,7 @@ namespace DoAnNosql
             row["statusOfInsurance"] = rel.status;
 
             dataTable_Merge.Rows.Add(row);
+            
         }
 
         private async Task AddInsuranceAndRelationAsync(CongDan congDan, Insurance insurance, HAS_INSURANCE rel)
@@ -315,7 +317,7 @@ namespace DoAnNosql
                 };
 
                 var insuranceCreateResult = await session.RunAsync(createInsuranceQuery, insuranceParameters);
-                var insuranceRecord = await insuranceCreateResult.SingleAsync(); // lỗi ngay đây
+                var insuranceRecord = await insuranceCreateResult.SingleAsync(); 
                 var insuranceNode = insuranceRecord[0]?.As<INode>();
 
                 if (insuranceNode == null)
@@ -348,8 +350,8 @@ namespace DoAnNosql
                 {
                     var relationshipResult = await session.RunAsync(createRelationshipQuery, relationshipParameters);
                     var relationshipRecord = await relationshipResult.SingleAsync();
-
-                    UpdateDataTable(congDan, insurance, rel);
+                    //UpdateDataTable(congDan, insurance, rel);
+                    ReFreshDataGrid();
                     MessageBox.Show("Thêm bảo hiểm và thêm relation success");
                 }
                 catch (Exception ex)
@@ -744,8 +746,8 @@ namespace DoAnNosql
             Document baoCao = new Document("Template\\Mau_Bao_Cao.doc");
 
             // Bước 2: Điền các thông tin cố định
-            baoCao.MailMerge.Execute(new[] { "TINH" }, new[] { "ĐOM ĐÓM" });
-            baoCao.MailMerge.Execute(new[] { "Ngay_Thang_Nam_BC" }, new[] { string.Format("JACK 97, ngày {0} tháng {1} năm {2}", homNay.Day, homNay.Month, homNay.Year) });
+            baoCao.MailMerge.Execute(new[] { "TINH" }, new[] { "TP.HCM" });
+            baoCao.MailMerge.Execute(new[] { "Ngay_Thang_Nam_BC" }, new[] { string.Format(" ngày {0} tháng {1} năm {2}", homNay.Day, homNay.Month, homNay.Year) });
             baoCao.MailMerge.Execute(new[] { "HO_TEN" }, new[] { lb_idcd.Text });
             baoCao.MailMerge.Execute(new[] { "Tuoi" }, new[] { lb_tuoi.Text });
             baoCao.MailMerge.Execute(new[] { "CCCD" }, new[] { comboBox1.Text });
@@ -753,7 +755,6 @@ namespace DoAnNosql
             baoCao.MailMerge.Execute(new[] { "Start" }, new[] { FormatDate(tb_start_date.Text) });
             baoCao.MailMerge.Execute(new[] { "End" }, new[] { FormatDate(tb_end_date.Text) });
             baoCao.MailMerge.Execute(new[] { "So_HD" }, new[] { tb_policy_id.Text });
-            baoCao.MailMerge.Execute(new[] { "SDT" }, new[] { "JACK 97 123123" });
             baoCao.MailMerge.Execute(new[] { "Que_Quan" }, new[] { "Bến Tre" });
 
             baoCao.MailMerge.Execute(new[] { "Loai_Bao_Hiem" }, new[] { comboBox2.Text });

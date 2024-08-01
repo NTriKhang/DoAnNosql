@@ -8,8 +8,8 @@ namespace DoAnNosql.Models
 {
     public class Phuong
     {
-        public int id    { get; set; }
-        public string ten { get; set; }
+        public int id  { get; set; }
+        public string name { get; set; }
         
     }
 }

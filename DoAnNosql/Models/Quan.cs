@@ -9,7 +9,6 @@ namespace DoAnNosql.Models
     public class Quan
     {
         public string Id { get; set; }
-        public string ten { get; set; }
-        public Phuong? phuong { get; set; }
+        public string name { get; set; }
     }
 }
