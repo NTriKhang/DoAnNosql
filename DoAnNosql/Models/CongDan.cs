@@ -13,6 +13,10 @@ namespace DoAnNosql.Models
         public int tuoi { set; get; }
         public string cccd { set; get; } = string.Empty;
 
-        
+        public DateTime ngaysinh { set; get; }
+        public string diachi { set; get; }
+
+
+
     }
 }
