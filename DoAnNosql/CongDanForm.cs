@@ -539,14 +539,16 @@ namespace DoAnNosql
             {
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
-                    if (row.Cells["CCCD"].Value != null)
+                    if (row.Cells["Id"].Value != null && (string)row.Cells["Id"].Value == txtId.Text)
                     {
                         row.Cells["HoTen"].Value = txtName.Text;
                         row.Cells["Tuoi"].Value = txtTuoi.Text;
                         row.Cells["CCCD"].Value = txtCCCD.Text;
                         row.Cells["diachi"].Value = txt_diachi.Text;
                         row.Cells["ngaysinh"].Value = Dtp_NgaySinh.Value;
-                        row.Cells["ID"].Value = txtId.Text;
+                        //row.Cells["ID"].Value = txtId.Text;
+                        row.Cells["NamePhuong"].Value = txtCCCD.Text;
+                        row.Cells["NameQuan"].Value = txtCCCD.Text;
                         break;
                     }
                 }
@@ -717,6 +719,7 @@ namespace DoAnNosql
         }
         private void btnSaveUpdate_Click(object sender, EventArgs e)
         {
+            
             _ = UpdateNode();
             
         }
