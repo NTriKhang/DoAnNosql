@@ -789,7 +789,7 @@ namespace DoAnNosql
             dataGridView1.Enabled = true;
             
             // Bước 4: Lưu và mở file
-            string filePath = "D:\\HK7\\MongoDB\\DoAn\\DoAnNosql\\bin\\Debug\\net7.0-windows\\Template\\Mau_Bao_Cao.doc";
+            string filePath = "D:\\HK7\\MongoDB\\DoAn\\DoAnNosql\\bin\\Debug\\net7.0-windows\\temp\\Mau_Bao_Cao.doc";
             baoCao.Save(filePath);
 
             // Mở tệp tài liệu bằng ứng dụng mặc định
