@@ -25,8 +25,6 @@ namespace DoAnNosql
             dataTableQuan = new DataTable();
             _ = ReFreshDataGrid();
             DisableField();
-
-
         }
         public string Trash_Old_Phuong = "";
         public string Trash_Old_Quan = "";
@@ -36,7 +34,7 @@ namespace DoAnNosql
             dataTableQuan.Columns.Add("name", typeof(string));
             LoadDataIntoComboBoxAsync();
             LoadDataIntoComboBoxAsyncQuan();
-            
+
         }
 
         private void DisableField()
@@ -66,7 +64,7 @@ namespace DoAnNosql
         private void PopulateComboBox(DataTable dataTable)
         {
             cb_Phuong.Items.Clear(); // clear cái cache trước
-                
+
             foreach (DataRow row in dataTable.Rows)
             {
                 // đổ data table cột họ tên vô check null rồi thêm vào cái combo box
@@ -137,7 +135,7 @@ namespace DoAnNosql
 
         private async Task GetAllCongDan(DataTable dataTable)
         {
-            
+
             try
             {
                 using (var session = _driver.AsyncSession())
@@ -178,7 +176,7 @@ namespace DoAnNosql
                                 name = quanNode.Properties.ContainsKey("name") ? quanNode["name"].As<string>() : string.Empty
                             };
 
-                            dataTable.Rows.Add(congDan.id, congDan.hoTen, congDan.tuoi, congDan.cccd, congDan.diachi, congDan.ngaysinh, phuong.name,quan.name);
+                            dataTable.Rows.Add(congDan.id, congDan.hoTen, congDan.tuoi, congDan.cccd, congDan.diachi, congDan.ngaysinh, phuong.name, quan.name);
                         }
                     }
                     else
@@ -223,7 +221,7 @@ namespace DoAnNosql
                 var record = await createResult.SingleAsync();
 
                 var nodeId = record[0]?.As<INode>();
-                
+
                 if (nodeId == null)
                 {
                     MessageBox.Show("Dòng 221 lỗi tạo công dân");
@@ -467,7 +465,7 @@ namespace DoAnNosql
         }
         private async Task DeleteNode()
         {
-            
+
             using (var session = _driver.AsyncSession())
             {
                 try
@@ -653,11 +651,11 @@ namespace DoAnNosql
                             };
 
                             await session.RunAsync(updateRelationsQuery, updateRelationsParameters);
-                            
+
                             MessageBox.Show("Cập nhật Công Dân và liên kết thành công.");
 
                         }
-                        
+
                     }
                     catch (Exception ex)
                     {
@@ -685,10 +683,10 @@ namespace DoAnNosql
                 cb_Phuong.Text = row.Cells["NamePhuong"].Value.ToString();
                 cb_Quan.Text = row.Cells["NameQuan"].Value.ToString();
                 txt_diachi.Text = row.Cells["diachi"].Value.ToString();
-                if(DateTime.TryParse(row.Cells["ngaysinh"].Value.ToString(), out ngaysinhDateTime))
+                if (DateTime.TryParse(row.Cells["ngaysinh"].Value.ToString(), out ngaysinhDateTime))
                 {
                     Dtp_NgaySinh.Value = ngaysinhDateTime;
-                }    
+                }
             }
         }
 
@@ -719,9 +717,9 @@ namespace DoAnNosql
         }
         private void btnSaveUpdate_Click(object sender, EventArgs e)
         {
-            
+
             _ = UpdateNode();
-            
+
         }
 
         private void Strip_TTBaoHiem_Click(object sender, EventArgs e)
@@ -737,7 +735,7 @@ namespace DoAnNosql
 
             if (!string.IsNullOrEmpty(selectedPhuong))
             {
-                
+
                 //// Tìm tên công dân từ DataTable => CCCD
                 //var dataTable = GetDataTable(); // Hàm này trả về DataTable đã được cập nhật
 
@@ -746,11 +744,23 @@ namespace DoAnNosql
                 //    var phuong = row["name"].ToString();
                 //    if (phuong == selectedPhuong)
                 //    {
-                        
+
                 //        break;
                 //    }
                 //}
             }
+        }
+
+        private void Strip_SaoLuu_Click(object sender, EventArgs e)
+        {
+            SaoLuu backup = new SaoLuu();
+            backup.ShowDialog();
+        }
+
+        private void Strip_PhucHoi_Click(object sender, EventArgs e)
+        {
+            PhucHoi restore = new PhucHoi();
+            restore.ShowDialog();
         }
     }
 }

@@ -476,9 +476,10 @@
             Controls.Add(label1);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             Name = "InsuranceForm";
-            Text = "Insurance";
+            Text = "Form Quản Lý Thông Tin Bảo Hiểm của Công Dân";
             Load += Insurance_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
