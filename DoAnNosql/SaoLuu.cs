@@ -222,11 +222,11 @@ namespace DoAnNosql
 
         private void btn_openfileBK_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog dialogRes = new FolderBrowserDialog();
-            dialogRes.ShowDialog();
-            if (dialogRes.ShowDialog() == DialogResult.OK)
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.DefaultExt = ".json";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                txt_pathjson.Text = dialogRes.SelectedPath.ToString();
+                txt_pathjson.Text = openFileDialog.FileName;
                 btn_KhoiPhuc.Enabled = true;
             }
         }

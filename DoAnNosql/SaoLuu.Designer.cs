@@ -34,23 +34,23 @@
             label1 = new Label();
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
+            btn_KhoiPhuc = new Button();
+            groupBox5 = new GroupBox();
+            groupBox6 = new GroupBox();
+            btn_openfileBK = new Button();
+            txt_pathjson = new TextBox();
             groupBox3 = new GroupBox();
             btn_TaiXuong = new Button();
             groupBox4 = new GroupBox();
             txt_LocalPath = new TextBox();
             btn_OpenLocalPath = new Button();
             folderBrowserDialog1 = new FolderBrowserDialog();
-            groupBox5 = new GroupBox();
-            txt_pathjson = new TextBox();
-            groupBox6 = new GroupBox();
-            btn_openfileBK = new Button();
-            btn_KhoiPhuc = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
-            groupBox3.SuspendLayout();
-            groupBox4.SuspendLayout();
             groupBox5.SuspendLayout();
             groupBox6.SuspendLayout();
+            groupBox3.SuspendLayout();
+            groupBox4.SuspendLayout();
             SuspendLayout();
             // 
             // btn_SaoLuu
@@ -105,6 +105,53 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Thao Tác";
             // 
+            // btn_KhoiPhuc
+            // 
+            btn_KhoiPhuc.Location = new Point(479, 32);
+            btn_KhoiPhuc.Name = "btn_KhoiPhuc";
+            btn_KhoiPhuc.Size = new Size(169, 54);
+            btn_KhoiPhuc.TabIndex = 6;
+            btn_KhoiPhuc.Text = "Khôi Phục Dữ Liệu";
+            btn_KhoiPhuc.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            groupBox5.Controls.Add(groupBox6);
+            groupBox5.Location = new Point(30, 382);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Size = new Size(660, 125);
+            groupBox5.TabIndex = 5;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "Group Khôi Phục ";
+            // 
+            // groupBox6
+            // 
+            groupBox6.Controls.Add(btn_openfileBK);
+            groupBox6.Controls.Add(txt_pathjson);
+            groupBox6.Location = new Point(21, 22);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Size = new Size(553, 77);
+            groupBox6.TabIndex = 1;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "Đường Dẫn File Json";
+            // 
+            // btn_openfileBK
+            // 
+            btn_openfileBK.Location = new Point(428, 16);
+            btn_openfileBK.Name = "btn_openfileBK";
+            btn_openfileBK.Size = new Size(107, 53);
+            btn_openfileBK.TabIndex = 1;
+            btn_openfileBK.Text = "Open File JSON";
+            btn_openfileBK.UseVisualStyleBackColor = true;
+            btn_openfileBK.Click += btn_openfileBK_Click;
+            // 
+            // txt_pathjson
+            // 
+            txt_pathjson.Location = new Point(6, 33);
+            txt_pathjson.Name = "txt_pathjson";
+            txt_pathjson.Size = new Size(416, 23);
+            txt_pathjson.TabIndex = 0;
+            // 
             // groupBox3
             // 
             groupBox3.Controls.Add(btn_TaiXuong);
@@ -155,53 +202,6 @@
             btn_OpenLocalPath.UseVisualStyleBackColor = true;
             btn_OpenLocalPath.Click += btn_OpenLocalPath_Click;
             // 
-            // groupBox5
-            // 
-            groupBox5.Controls.Add(groupBox6);
-            groupBox5.Location = new Point(30, 382);
-            groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(660, 125);
-            groupBox5.TabIndex = 5;
-            groupBox5.TabStop = false;
-            groupBox5.Text = "Group Khôi Phục ";
-            // 
-            // txt_pathjson
-            // 
-            txt_pathjson.Location = new Point(6, 33);
-            txt_pathjson.Name = "txt_pathjson";
-            txt_pathjson.Size = new Size(416, 23);
-            txt_pathjson.TabIndex = 0;
-            // 
-            // groupBox6
-            // 
-            groupBox6.Controls.Add(btn_openfileBK);
-            groupBox6.Controls.Add(txt_pathjson);
-            groupBox6.Location = new Point(21, 22);
-            groupBox6.Name = "groupBox6";
-            groupBox6.Size = new Size(535, 77);
-            groupBox6.TabIndex = 1;
-            groupBox6.TabStop = false;
-            groupBox6.Text = "Đường Dẫn File Json";
-            // 
-            // btn_openfileBK
-            // 
-            btn_openfileBK.Location = new Point(428, 16);
-            btn_openfileBK.Name = "btn_openfileBK";
-            btn_openfileBK.Size = new Size(88, 53);
-            btn_openfileBK.TabIndex = 1;
-            btn_openfileBK.Text = "Open Folder";
-            btn_openfileBK.UseVisualStyleBackColor = true;
-            btn_openfileBK.Click += btn_openfileBK_Click;
-            // 
-            // btn_KhoiPhuc
-            // 
-            btn_KhoiPhuc.Location = new Point(479, 32);
-            btn_KhoiPhuc.Name = "btn_KhoiPhuc";
-            btn_KhoiPhuc.Size = new Size(169, 54);
-            btn_KhoiPhuc.TabIndex = 6;
-            btn_KhoiPhuc.Text = "Khôi Phục Dữ Liệu";
-            btn_KhoiPhuc.UseVisualStyleBackColor = true;
-            // 
             // SaoLuu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -214,12 +214,12 @@
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
-            groupBox3.ResumeLayout(false);
-            groupBox4.ResumeLayout(false);
-            groupBox4.PerformLayout();
             groupBox5.ResumeLayout(false);
             groupBox6.ResumeLayout(false);
             groupBox6.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
             ResumeLayout(false);
         }
 
