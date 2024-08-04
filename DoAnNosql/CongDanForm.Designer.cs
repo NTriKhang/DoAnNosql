@@ -51,7 +51,6 @@
             bảoHiểmToolStripMenuItem = new ToolStripMenuItem();
             Strip_TTBaoHiem = new ToolStripMenuItem();
 
-            Strip_BHThanhToan = new ToolStripMenuItem();
             ThongKeToolStripMenuItem = new ToolStripMenuItem();
             Strip_ThongKeDanSo = new ToolStripMenuItem();
 
@@ -339,12 +338,7 @@
             Strip_TTBaoHiem.Size = new Size(275, 34);
             Strip_TTBaoHiem.Text = "Thông Tin Bảo Hiểm";
             Strip_TTBaoHiem.Click += Strip_TTBaoHiem_Click;
-            // 
-            // Strip_BHThanhToan
-            // 
-            Strip_BHThanhToan.Name = "Strip_BHThanhToan";
-            Strip_BHThanhToan.Size = new Size(275, 34);
-            Strip_BHThanhToan.Text = "Thanh Toán";
+
             // 
             // ThongKeToolStripMenuItem
             // 
