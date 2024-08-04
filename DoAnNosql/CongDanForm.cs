@@ -762,5 +762,13 @@ namespace DoAnNosql
             PhucHoi restore = new PhucHoi();
             restore.ShowDialog();
         }
+
+        private void Strip_ThongKeDanSo_Click(object sender, EventArgs e)
+        {
+            ThongKeForm ins = new ThongKeForm();
+            ins.ShowDialog();
+        }
+
+
     }
 }
