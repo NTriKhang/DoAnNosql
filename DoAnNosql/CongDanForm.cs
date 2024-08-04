@@ -25,8 +25,6 @@ namespace DoAnNosql
             dataTableQuan = new DataTable();
             _ = ReFreshDataGrid();
             DisableField();
-
-
         }
         public string Trash_Old_Phuong = "";
         public string Trash_Old_Quan = "";
@@ -753,11 +751,24 @@ namespace DoAnNosql
             }
         }
 
+        private void Strip_SaoLuu_Click(object sender, EventArgs e)
+        {
+            SaoLuu backup = new SaoLuu();
+            backup.ShowDialog();
+        }
+
+        private void Strip_PhucHoi_Click(object sender, EventArgs e)
+        {
+            PhucHoi restore = new PhucHoi();
+            restore.ShowDialog();
+        }
+
         private void Strip_ThongKeDanSo_Click(object sender, EventArgs e)
         {
             ThongKeForm ins = new ThongKeForm();
             ins.ShowDialog();
         }
+
 
     }
 }
